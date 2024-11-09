@@ -1,12 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
+:root {
+  --sunset: linear-gradient(
+    310deg,
+    rgb(214, 233, 255),
+    rgb(214, 229, 255),
+    rgb(209, 214, 255),
+    rgb(221, 209, 255),
+    rgb(243, 209, 255),
+    rgb(255, 204, 245),
+    rgb(255, 204, 223),
+    rgb(255, 200, 199),
+    rgb(255, 216, 199),
+    rgb(255, 221, 199)
+  );
+  --peach: linear-gradient(
+    135deg,
+    rgb(255, 237, 188) 0%,
+    rgb(237, 66, 100) 100%
+  );
+  --green: linear-gradient(
+    135deg,
+    rgb(179, 255, 171) 0%,
+    rgb(18, 255, 247) 100%
+  );
+  --blue: linear-gradient(
+    135deg,
+    rgb(198, 245, 255) 0%,
+    rgb(160, 233, 255) 100%
+  );
 }
 
+/*
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,12 +45,31 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif; */
   display: flex;
+
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(
-    135deg,
-    rgb(179, 255, 171) 0%,
-    rgb(18, 255, 247) 100%
-  );
+  background: var(--green);
+}
+
+.bg-sunset {
+  background-image: var(--sunset);
+}
+
+.bg-peach {
+  background-image: var(--peach);
+}
+
+.bg-green {
+  background-image: var(--green);
+}
+
+.bg-blue {
+  background-image: var(--blue);
+}
+
+@media (max-width: 370px) {
+  body {
+    height: 100%;
+  }
 }
