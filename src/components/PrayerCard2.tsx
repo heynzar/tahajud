@@ -16,7 +16,7 @@ export default function PrayerCard2({
   return (
     <div
       className={twMerge(
-        "flex gap-1 flex-grow flex-[1_0_30%] flex-col justify-center border transition-colors  rounded-xl py-1 pl-4 min-w-32",
+        "flex gap-1 flex-grow flex-[1_0_30%] flex-col justify-center border  rounded-xl py-1 pl-4 min-w-32 hover:scale-105 transition-all",
         `${theme}-theme-card`
       )}
     >
@@ -26,7 +26,7 @@ export default function PrayerCard2({
       </div>
       <div className="w-[80%] bg-[#ccc]/50 h-[1px]"></div>
       <div>
-        <h2 className="font-medium text-sm ">{Prayerbetween}</h2>
+        <h3 className="font-medium text-sm ">{Prayerbetween}</h3>
         <p className="text-2xl font-medium -mt-1">{PrayerbetweenTime}</p>
       </div>
     </div>

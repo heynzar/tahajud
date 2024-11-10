@@ -27,15 +27,6 @@
     rgb(160, 233, 255) 100%
   );
 }
-
-/*
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
-
 .visually-hidden {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -45,7 +36,6 @@
   white-space: nowrap;
   width: 1px;
 }
-
 /* body */
 .bg-sunset {
   background-image: var(--sunset);
@@ -59,7 +49,6 @@
 .bg-blue {
   background-image: var(--blue);
 }
-
 /* next Prayer */
 .green-theme-next {
   @apply !bg-[#4dffaf];
@@ -86,7 +75,6 @@
 .sunset-theme-circle {
   @apply bg-pink-300 dark:bg-pink-300/90 shadow-[0_0px_30px_rgb(250,168,212,0.6)];
 }
-
 /* card */
 .green-theme-card {
   @apply border-emerald-500 dark:border-emerald-700 text-emerald-950 dark:text-emerald-100 bg-emerald-100/40 dark:bg-emerald-800;
@@ -100,8 +88,7 @@
 .peach-theme-card {
   @apply border-red-500 dark:border-red-700 text-red-950 dark:text-red-100 bg-red-100/40 dark:bg-red-800;
 }
-
-/* text */
+/* main */
 .green-theme-main {
   @apply bg-white dark:bg-emerald-950;
 }
@@ -114,7 +101,7 @@
 .sunset-theme-main {
   @apply bg-white dark:bg-pink-950;
 }
-
+/* button save */
 .green-theme-btn {
   @apply bg-emerald-500 hover:bg-emerald-400 transition-colors;
 }
@@ -127,6 +114,7 @@
 .sunset-theme-btn {
   @apply bg-pink-500  hover:bg-pink-400 transition-colors;
 }
+/* Modal */
 .green-theme-set {
   @apply border-emerald-500 dark:border-emerald-700 text-emerald-950 dark:text-emerald-100 bg-emerald-100 dark:bg-emerald-800;
 }
@@ -139,7 +127,6 @@
 .peach-theme-set {
   @apply border-red-500 dark:border-red-700 text-red-950 dark:text-red-100 bg-red-100 dark:bg-red-800;
 }
-
 form input[type="radio"] {
   appearance: none;
   cursor: pointer;
@@ -149,23 +136,9 @@ form input[type="radio"] {
   background-color: #ccc;
   border-radius: 50%;
 }
-
 form input[type="radio"]:checked {
   outline-offset: 3px;
   outline: 3px solid #ccc;
-}
-
-.color-picker input[type="radio"]#sunset {
-  --radio-color: gray;
-}
-.color-picker input[type="radio"]#peach {
-  --radio-color: pink;
-}
-.color-picker input[type="radio"]#blue {
-  --radio-color: blue;
-}
-.color-picker input[type="radio"]#green {
-  --radio-color: green;
 }
 .big-boy {
   display: flex;
@@ -173,11 +146,9 @@ form input[type="radio"]:checked {
   justify-content: center;
   align-items: center;
 }
-
 .body-settings {
   height: 100vh;
 }
-
 @media (max-width: 370px) {
   .big-boy {
     height: 100%;

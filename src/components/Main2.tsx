@@ -213,6 +213,7 @@ function Main2() {
           onUpdateCountryData={handleUpdateCountryData}
           countryData={countryData}
         />
+        <h1 className="hidden">Tahajud</h1>
         <div
           className={twMerge(
             "transition-colors p-4 rounded-3xl shadow-[0_5px_30px_rgb(0,0,0,0.12)]",
@@ -222,12 +223,12 @@ function Main2() {
           <div className="flex flex-col lg:flex-row  justify-center items-center gap-3">
             <div
               className={twMerge(
-                "h-[122px] lg:hidden w-full  rounded-xl flex flex-col justify-center items-center",
+                "h-[122px] lg:hidden w-full   rounded-xl flex flex-col justify-center items-center",
                 `${countryData.theme}-theme-next`
               )}
             >
               <h2 className="font-medium ">Next Prayer </h2>
-              <p className="text-3xl font-medium -mt-1">{result}</p>
+              <p className="text-[2.5rem] font-medium -mt-2">{result}</p>
             </div>
 
             {/* Prayer Cards */}
@@ -281,12 +282,12 @@ function Main2() {
               <div className="flex flex-col gap-3">
                 <div
                   className={twMerge(
-                    "h-[122px] hidden w-full  rounded-xl lg:flex flex-col justify-center items-center",
+                    "h-[122px] hidden w-full rounded-xl lg:flex flex-col justify-center items-center",
                     `${countryData.theme}-theme-next`
                   )}
                 >
-                  <h2 className="font-medium">Next Prayer </h2>
-                  <p className="text-3xl font-medium -mt-1">{result}</p>
+                  <h2 className="font-medium">Next Prayer after</h2>
+                  <p className="text-[2.5rem] font-medium -mt-2">{result}</p>
                 </div>
                 <div className="flex gap-3 flex-grow flex-wrap">
                   <Sun

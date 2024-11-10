@@ -14,7 +14,7 @@ export default function Sun({
   return (
     <div
       className={twMerge(
-        "flex gap-1 flex-grow flex-[1_0_30%] flex-col justify-center border transition-colors  rounded-xl py-1 pl-4 min-w-32",
+        "flex gap-1 flex-grow flex-[1_0_30%] flex-col justify-center border hover:scale-105 transition-all  rounded-xl py-1 pl-4 min-w-32",
         `${theme}-theme-card`
       )}
     >
