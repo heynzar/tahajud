@@ -15,12 +15,18 @@ export default function Nav({
 }: {
   toggleDarkMode: MouseEventHandler<SVGSVGElement>;
   onUpdateCountryData: (
-    newData: SetStateAction<{ country: string; city: string; method: string }>
+    newData: SetStateAction<{
+      country: string;
+      city: string;
+      method: string;
+      theme: string;
+    }>
   ) => void;
   countryData: {
     country: string;
     city: string;
     method: string;
+    theme: string;
   };
   hijriDate: string;
   forwardFunction: MouseEventHandler<SVGSVGElement>;
@@ -40,25 +46,27 @@ export default function Nav({
     country: "Morocco",
     city: "Martil",
     method: "21",
+    theme: "green",
   });
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
     const { name, value } = event.target;
-    setLocalCountryData({
-      ...localCountryData,
+    setLocalCountryData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   }
 
-  function handleSaveClick() {
+  function handleSaveClick(event: React.MouseEvent) {
+    event.preventDefault(); // Prevent form submission
     setVisible("hidden");
     onUpdateCountryData(localCountryData);
   }
 
   return (
-    <nav className="w-full text-emerald-950 py-3 gap-5 flex flex-col-reverse justify-center items-center lg:flex-row lg:justify-between font-semibold">
+    <nav className="w-full text-gray-950 py-3 gap-5 flex flex-col-reverse justify-center items-center lg:flex-row lg:justify-between font-semibold">
       <div className="flex gap-3 items-center">
         <div className="p-1 hover:bg-white/50 rounded-md transition-colors">
           <CircleArrowRight
@@ -88,13 +96,16 @@ export default function Nav({
 
       <div
         className={twMerge(
-          "absolute inset-0 justify-center items-center z-10 bg-gray-800/50 h-screen w-screen",
+          "absolute body-settings px-3 inset-0 justify-center items-center z-10 bg-gray-800/70 w-screen",
           visible
         )}
         onClick={handleSectionClick}
       >
-        <div
-          className="flex font-medium flex-col gap-5 p-5 min-w-80 bg-white dark:bg-emerald-950 dark:text-emerald-100 text-emerald-950 rounded-2xl"
+        <form
+          className={twMerge(
+            "flex font-medium flex-col gap-5 p-5 min-w-80  rounded-2xl",
+            `${countryData.theme}-theme-set`
+          )}
           onClick={handleInnerClick}
         >
           <div className="border-b-2 border-black/50 pb-3">
@@ -110,7 +121,7 @@ export default function Nav({
               placeholder="Morocco"
               id="country"
               name="country"
-              className="h-10 rounded-lg pl-4 bg-emerald-100 placeholder:text-black/50"
+              className="h-10 rounded-lg pl-4 bg-white/80 dark:bg-white/40 placeholder:text-black/50"
             />
           </div>
 
@@ -123,7 +134,7 @@ export default function Nav({
               type="text"
               id="city"
               name="city"
-              className="h-10 rounded-lg pl-4 bg-emerald-100 placeholder:text-black/50"
+              className="h-10 rounded-lg pl-4 bg-white/80 dark:bg-white/40 placeholder:text-black/50"
             />
           </div>
 
@@ -134,7 +145,7 @@ export default function Nav({
               value={localCountryData.method}
               name="method"
               id="method"
-              className="h-10 rounded-lg px-4 bg-emerald-100"
+              className="h-10 rounded-lg px-4 bg-white/80 dark:bg-white/40"
             >
               <option value="">Select Prayer Method</option>
               <option value="1">🌍 Muslim World League</option>
@@ -180,24 +191,73 @@ export default function Nav({
             </select>
           </div>
 
-          <div className="flex flex-col gap-2 border-t-2 border-black/50 pt-3">
-            <label htmlFor="theme">Theme</label>
-            <div id="theme" className="flex flex-wrap gap-4">
-              <div className="size-10 rounded-full cursor-pointer bg-sunset"></div>
-              <div className="size-10 rounded-full cursor-pointer bg-green"></div>
-              <div className="size-10 rounded-full cursor-pointer bg-peach"></div>
-              <div className="size-10 rounded-full cursor-pointer bg-blue"></div>
-            </div>
-          </div>
+          <fieldset className="flex gap-2 border-t-2 border-black/50 pt-3">
+            <legend className="visually-hidden">Pick a Theme</legend>
+
+            <label htmlFor="green" className="visually-hidden">
+              Green
+            </label>
+            <input
+              type="radio"
+              name="theme"
+              id="green"
+              value="green"
+              className="bg-green"
+              onChange={handleChange}
+              checked={localCountryData.theme === "green"}
+            />
+
+            <label htmlFor="peach" className="visually-hidden">
+              Pink theme
+            </label>
+            <input
+              type="radio"
+              id="peach"
+              name="theme"
+              value="peach"
+              className="bg-peach"
+              onChange={handleChange}
+              checked={localCountryData.theme === "peach"}
+            />
+
+            <label htmlFor="blue" className="visually-hidden">
+              Blue theme
+            </label>
+            <input
+              type="radio"
+              id="blue"
+              name="theme"
+              value="blue"
+              className="bg-blue"
+              onChange={handleChange}
+              checked={localCountryData.theme === "blue"}
+            />
+
+            <label htmlFor="sunset" className="visually-hidden">
+              Green theme
+            </label>
+            <input
+              type="radio"
+              id="sunset"
+              name="theme"
+              value="sunset"
+              className="bg-sunset"
+              onChange={handleChange}
+              checked={localCountryData.theme === "sunset"}
+            />
+          </fieldset>
 
           <button
             onClick={handleSaveClick}
-            type="submit"
-            className="bg-emerald-400 p-2 rounded-xl hover:bg-emerald-300 transition-colors"
+            type="button" // Changed to type "button" to prevent form submission
+            className={twMerge(
+              " p-2 rounded-xl  transition-colors",
+              `${countryData.theme}-theme-btn`
+            )}
           >
             Save
           </button>
-        </div>
+        </form>
       </div>
     </nav>
   );

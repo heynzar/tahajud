@@ -15,11 +15,7 @@
     rgb(255, 216, 199),
     rgb(255, 221, 199)
   );
-  --peach: linear-gradient(
-    135deg,
-    rgb(255, 237, 188) 0%,
-    rgb(237, 66, 100) 100%
-  );
+  --peach: linear-gradient(135deg, rgb(255, 237, 188) 0%, #ed4264 100%);
   --green: linear-gradient(
     135deg,
     rgb(179, 255, 171) 0%,
@@ -40,36 +36,153 @@
   }
 } */
 
-body {
-  /* color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif; */
-  display: flex;
-
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  background: var(--green);
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
+/* body */
 .bg-sunset {
   background-image: var(--sunset);
 }
-
 .bg-peach {
   background-image: var(--peach);
 }
-
 .bg-green {
   background-image: var(--green);
 }
-
 .bg-blue {
   background-image: var(--blue);
 }
 
+/* next Prayer */
+.green-theme-next {
+  @apply !bg-[#4dffaf];
+}
+.peach-theme-next {
+  @apply bg-red-300;
+}
+.blue-theme-next {
+  @apply bg-sky-300;
+}
+.sunset-theme-next {
+  @apply bg-pink-300 dark:bg-pink-300/90;
+}
+
+.green-theme-circle {
+  @apply !bg-[#4dffaf] shadow-[0_0px_30px_rgb(0,255,140,0.6)];
+}
+.peach-theme-circle {
+  @apply bg-red-300 shadow-[0_0px_30px_rgb(252,165,165,0.6)];
+}
+.blue-theme-circle {
+  @apply bg-sky-300 shadow-[0_0px_30px_rgb(125,211,252,0.6)];
+}
+.sunset-theme-circle {
+  @apply bg-pink-300 dark:bg-pink-300/90 shadow-[0_0px_30px_rgb(250,168,212,0.6)];
+}
+
+/* card */
+.green-theme-card {
+  @apply border-emerald-500 dark:border-emerald-700 text-emerald-950 dark:text-emerald-100 bg-emerald-100/40 dark:bg-emerald-800;
+}
+.sunset-theme-card {
+  @apply border-pink-500 dark:border-pink-700 text-pink-950 dark:text-pink-100 bg-pink-100/40 dark:bg-pink-800;
+}
+.blue-theme-card {
+  @apply border-sky-500 dark:border-sky-700 text-sky-950 dark:text-sky-100 bg-blue-100/40 dark:bg-sky-800;
+}
+.peach-theme-card {
+  @apply border-red-500 dark:border-red-700 text-red-950 dark:text-red-100 bg-red-100/40 dark:bg-red-800;
+}
+
+/* text */
+.green-theme-main {
+  @apply bg-white dark:bg-emerald-950;
+}
+.peach-theme-main {
+  @apply bg-white dark:bg-red-950;
+}
+.blue-theme-main {
+  @apply bg-white dark:bg-sky-950;
+}
+.sunset-theme-main {
+  @apply bg-white dark:bg-pink-950;
+}
+
+.green-theme-btn {
+  @apply bg-emerald-500 hover:bg-emerald-400 transition-colors;
+}
+.peach-theme-btn {
+  @apply bg-red-500 hover:bg-red-400 transition-colors;
+}
+.blue-theme-btn {
+  @apply bg-sky-500 hover:bg-sky-400 transition-colors;
+}
+.sunset-theme-btn {
+  @apply bg-pink-500  hover:bg-pink-400 transition-colors;
+}
+.green-theme-set {
+  @apply border-emerald-500 dark:border-emerald-700 text-emerald-950 dark:text-emerald-100 bg-emerald-100 dark:bg-emerald-800;
+}
+.sunset-theme-set {
+  @apply border-pink-500 dark:border-pink-700 text-pink-950 dark:text-pink-100 bg-pink-100 dark:bg-pink-800;
+}
+.blue-theme-set {
+  @apply border-sky-500 dark:border-sky-700 text-sky-950 dark:text-sky-100 bg-blue-100 dark:bg-sky-800;
+}
+.peach-theme-set {
+  @apply border-red-500 dark:border-red-700 text-red-950 dark:text-red-100 bg-red-100 dark:bg-red-800;
+}
+
+form input[type="radio"] {
+  appearance: none;
+  cursor: pointer;
+  margin-left: 10px;
+  width: 3rem;
+  height: 3rem;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+form input[type="radio"]:checked {
+  outline-offset: 3px;
+  outline: 3px solid #ccc;
+}
+
+.color-picker input[type="radio"]#sunset {
+  --radio-color: gray;
+}
+.color-picker input[type="radio"]#peach {
+  --radio-color: pink;
+}
+.color-picker input[type="radio"]#blue {
+  --radio-color: blue;
+}
+.color-picker input[type="radio"]#green {
+  --radio-color: green;
+}
+.big-boy {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.body-settings {
+  height: 100vh;
+}
+
 @media (max-width: 370px) {
-  body {
+  .big-boy {
     height: 100%;
+  }
+  .body-settings {
+    height: 146%;
   }
 }

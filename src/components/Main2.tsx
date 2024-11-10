@@ -13,6 +13,7 @@ interface CountryData {
   country: string;
   city: string;
   method: string;
+  theme: string;
 }
 
 interface PrayerTime {
@@ -38,9 +39,10 @@ function Main2() {
     country: "Morocco",
     city: "Martil",
     method: "21",
+    theme: "green",
   });
   const [date, setDate] = useState<Date>(new Date());
-  const [hijriDate, SetHijriDate] = useState("");
+  const [hijriDate, SetHijriDate] = useState("Al Ahad 2 Jumādá al-ūlá 1446");
   const [prayerTimeDiffer, setPrayerTimeDiffer] = useState({
     tf: "06:19",
     fd: "06:19",
@@ -196,84 +198,116 @@ function Main2() {
   }, [countryData, date]);
 
   return (
-    <main
-      className={twMerge(
-        "lg:-mt-20 container flex flex-col gap-3 md:max-w-[640px] lg:max-w-[810px] 2xl:scale-150",
-        dark ? "dark" : ""
-      )}
-    >
-      <Nav
-        hijriDate={hijriDate}
-        forwardFunction={subtractDay}
-        backwarFunction={addDay}
-        toggleDarkMode={toggleDarkMode}
-        onUpdateCountryData={handleUpdateCountryData}
-        countryData={countryData}
-      />
-      <div className="bg-white dark:bg-emerald-950 transition-colors p-5 rounded-2xl shadow-[0_5px_30px_rgb(0,0,0,0.12)]">
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-3">
-          {/* Mobile-only next prayer display */}
-          <div className="h-[122px] lg:hidden w-full bg-[#4DFFAF] rounded-xl flex flex-col justify-center items-center">
-            <h2 className="font-medium">Next Prayer </h2>
-            <p className="text-3xl font-medium -mt-1">{result}</p>
-          </div>
+    <div className={twMerge("big-boy p-4", `bg-${countryData.theme}`)}>
+      <main
+        className={twMerge(
+          "lg:-mt-20 container flex flex-col gap-3 md:max-w-[640px] lg:max-w-[810px] 2xl:scale-150",
+          dark ? "dark" : ""
+        )}
+      >
+        <Nav
+          hijriDate={hijriDate}
+          forwardFunction={subtractDay}
+          backwarFunction={addDay}
+          toggleDarkMode={toggleDarkMode}
+          onUpdateCountryData={handleUpdateCountryData}
+          countryData={countryData}
+        />
+        <div
+          className={twMerge(
+            "transition-colors p-4 rounded-3xl shadow-[0_5px_30px_rgb(0,0,0,0.12)]",
+            `${countryData.theme}-theme-main`
+          )}
+        >
+          <div className="flex flex-col lg:flex-row  justify-center items-center gap-3">
+            <div
+              className={twMerge(
+                "h-[122px] lg:hidden w-full  rounded-xl flex flex-col justify-center items-center",
+                `${countryData.theme}-theme-next`
+              )}
+            >
+              <h2 className="font-medium ">Next Prayer </h2>
+              <p className="text-3xl font-medium -mt-1">{result}</p>
+            </div>
 
-          {/* Prayer Cards */}
-          <div className="flex gap-3 flex-wrap lg:max-w-[456px]">
-            <PrayerCard2
-              ParyerTime={prayerTime.tahjud}
-              PrayerName="Tahajud"
-              Prayerbetween="Tahajud-Fajr"
-              PrayerbetweenTime={prayerTimeDiffer.tf}
-            />
-            <PrayerCard2
-              ParyerTime={prayerTime.fajr}
-              PrayerName="Fajr"
-              Prayerbetween="Fajr-Duhur"
-              PrayerbetweenTime={prayerTimeDiffer.fd}
-            />
-            <PrayerCard2
-              ParyerTime={prayerTime.dhuhr}
-              PrayerName="Dhuhr"
-              Prayerbetween="Dhuhr-Asr"
-              PrayerbetweenTime={prayerTimeDiffer.da}
-            />
-            <PrayerCard2
-              ParyerTime={prayerTime.asr}
-              PrayerName="Asr"
-              Prayerbetween="Asr-Maghreb"
-              PrayerbetweenTime={prayerTimeDiffer.am}
-            />
-            <PrayerCard2
-              ParyerTime={prayerTime.maghrib}
-              PrayerName="Maghreb"
-              Prayerbetween="Maghreb-Isha"
-              PrayerbetweenTime={prayerTimeDiffer.mi}
-            />
-            <PrayerCard2
-              ParyerTime={prayerTime.isha}
-              PrayerName="Isha"
-              Prayerbetween="Isha-Fajr"
-              PrayerbetweenTime={prayerTimeDiffer.if}
-            />
-          </div>
+            {/* Prayer Cards */}
+            <div className="flex gap-3 flex-wrap lg:max-w-[456px]">
+              <PrayerCard2
+                theme={countryData.theme}
+                ParyerTime={prayerTime.tahjud}
+                PrayerName="Tahajud"
+                Prayerbetween="Tahajud-Fajr"
+                PrayerbetweenTime={prayerTimeDiffer.tf}
+              />
+              <PrayerCard2
+                theme={countryData.theme}
+                ParyerTime={prayerTime.fajr}
+                PrayerName="Fajr"
+                Prayerbetween="Fajr-Duhur"
+                PrayerbetweenTime={prayerTimeDiffer.fd}
+              />
+              <PrayerCard2
+                theme={countryData.theme}
+                ParyerTime={prayerTime.dhuhr}
+                PrayerName="Dhuhr"
+                Prayerbetween="Dhuhr-Asr"
+                PrayerbetweenTime={prayerTimeDiffer.da}
+              />
+              <PrayerCard2
+                theme={countryData.theme}
+                ParyerTime={prayerTime.asr}
+                PrayerName="Asr"
+                Prayerbetween="Asr-Maghreb"
+                PrayerbetweenTime={prayerTimeDiffer.am}
+              />
+              <PrayerCard2
+                theme={countryData.theme}
+                ParyerTime={prayerTime.maghrib}
+                PrayerName="Maghreb"
+                Prayerbetween="Maghreb-Isha"
+                PrayerbetweenTime={prayerTimeDiffer.mi}
+              />
+              <PrayerCard2
+                theme={countryData.theme}
+                ParyerTime={prayerTime.isha}
+                PrayerName="Isha"
+                Prayerbetween="Isha-Fajr"
+                PrayerbetweenTime={prayerTimeDiffer.if}
+              />
+            </div>
 
-          {/* Desktop-only next prayer display & sunrise/sunset */}
-          <div className="w-full lg:w-[300px]">
-            <div className="flex flex-col gap-3">
-              <div className="hidden h-[122px] w-full bg-[#4DFFAF] text-emerald-950 rounded-xl lg:flex flex-col justify-center items-center">
-                <h2 className="font-medium">Next Prayer </h2>
-                <p className="text-3xl font-medium -mt-1">{result}</p>
-              </div>
-              <div className="flex gap-3 flex-grow flex-wrap">
-                <Sun time={prayerTime.sunrise} name="Sunrise" reverse={false} />
-                <Sun time={prayerTime.sunset} name="Sunset" reverse={true} />
+            {/* Desktop-only next prayer display & sunrise/sunset */}
+            <div className="w-full lg:w-[300px]">
+              <div className="flex flex-col gap-3">
+                <div
+                  className={twMerge(
+                    "h-[122px] hidden w-full  rounded-xl lg:flex flex-col justify-center items-center",
+                    `${countryData.theme}-theme-next`
+                  )}
+                >
+                  <h2 className="font-medium">Next Prayer </h2>
+                  <p className="text-3xl font-medium -mt-1">{result}</p>
+                </div>
+                <div className="flex gap-3 flex-grow flex-wrap">
+                  <Sun
+                    theme={countryData.theme}
+                    time={prayerTime.sunrise}
+                    name="Sunrise"
+                    reverse={false}
+                  />
+                  <Sun
+                    theme={countryData.theme}
+                    time={prayerTime.sunset}
+                    name="Sunset"
+                    reverse={true}
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
 
