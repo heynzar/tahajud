@@ -96,7 +96,7 @@ export default function Nav({
 
       <div
         className={twMerge(
-          "absolute body-settings px-3 inset-0 justify-center items-center z-10 bg-gray-800/70 w-screen",
+          "absolute body-settings px-3 2xl:w-full 2xl:-translate-y-1/3 inset-0 justify-center items-center z-10 bg-gray-800/70 w-screen",
           visible
         )}
         onClick={handleSectionClick}
@@ -145,7 +145,7 @@ export default function Nav({
               value={localCountryData.method}
               name="method"
               id="method"
-              className="h-10 rounded-lg px-4 bg-white/80 dark:bg-white/40"
+              className="h-10 rounded-lg px-4 bg-white/80 dark:bg-gray-900 "
             >
               <option value="">Select Prayer Method</option>
               <option value="1">🌍 Muslim World League</option>
