@@ -33,6 +33,9 @@ interface TimeState {
 }
 
 function Main2() {
+  // Handlers
+  const toggleDarkMode = () => setDark((prev) => !prev);
+
   // State hooks
   const [dark, setDark] = useState<boolean>(false);
   const [countryData, setCountryData] = useState<CountryData>({
@@ -62,30 +65,90 @@ function Main2() {
     sunset: "20:35",
     sunrise: "06:19",
   });
-  const [result, setResult] = useState<string>("1h 20min");
+
+  const [prayerTimes, setPrayerTimes] = useState<PrayerTimes>({
+    Fajr: "4:24",
+    Dhuhr: "13:33",
+    Asr: "17:06",
+    Maghreb: "20:41",
+    Isha: "22:14",
+  });
+
+  const [result, setResult] = useState<{ name: string; nextUntil: string }>({
+    name: "Fajr",
+    nextUntil: "1h 04min",
+  });
   const [time, setTime] = useState<TimeState>({
     hour: new Date().getHours(),
     minutes: new Date().getMinutes(),
   });
 
   // Derived constants
-  const paryerlist = prayerList.map((p) => Number(p[0]) * 60 + Number(p[1]));
-  const thisHour = time.hour * 60 + time.minutes;
 
-  // Handlers
-  const toggleDarkMode = () => setDark((prev) => !prev);
+  type PrayerTimes = {
+    Fajr: string;
+    Dhuhr: string;
+    Asr: string;
+    Maghreb: string;
+    Isha: string;
+  };
 
-  const handleNextPrayer = () => {
-    for (let index = 0; index < paryerlist.length; index++) {
-      if (paryerlist[index] > thisHour) {
-        const minutes = paryerlist[index] - thisHour;
-        const hours = Math.floor(minutes / 60);
-        const remainingMinutes = minutes % 60;
-        setResult(`${hours}h ${remainingMinutes}min`);
-        break;
+  function getNextPrayerTime(prayerTimes: PrayerTimes): {
+    name: string;
+    nextUntil: string;
+  } {
+    const now = new Date();
+    let nextPrayerName = "";
+    let nextPrayer: Date | null = null;
+    let timeUntilNextPrayerMinutes: number | null = null;
+
+    // Loop through each prayer time in the object
+    for (const [name, time] of Object.entries(prayerTimes)) {
+      const [hours, minutes] = time.split(":").map(Number);
+
+      // Create a Date object for today's prayer time
+      const prayerTime = new Date(now);
+      prayerTime.setHours(hours, minutes, 0, 0);
+
+      // Find the next upcoming prayer time
+      if (
+        prayerTime > now &&
+        (nextPrayer === null || prayerTime < nextPrayer)
+      ) {
+        nextPrayer = prayerTime;
+        nextPrayerName = name;
+        timeUntilNextPrayerMinutes = Math.round(
+          (prayerTime.getTime() - now.getTime()) / 1000 / 60
+        );
       }
     }
-  };
+
+    // If no future prayer time is found, set the first prayer time of the next day as nextPrayer
+    if (!nextPrayer) {
+      const [hours, minutes] = prayerTimes.Fajr.split(":").map(Number);
+      nextPrayer = new Date(now);
+      nextPrayer.setDate(now.getDate() + 1); // Move to next day
+      nextPrayer.setHours(hours, minutes, 0, 0);
+      nextPrayerName = "Fajr";
+      timeUntilNextPrayerMinutes = Math.round(
+        (nextPrayer.getTime() - now.getTime()) / 1000 / 60
+      );
+    }
+
+    // Calculate hours and minutes from total minutes
+    const hours = Math.floor(timeUntilNextPrayerMinutes! / 60);
+    const minutes = timeUntilNextPrayerMinutes! % 60;
+
+    // Format time as "Xh Ymin" or "Ymin" if less than an hour
+    const timeUntilNextPrayer =
+      hours > 0 ? `${hours}h ${minutes}min` : `${minutes}min`;
+    const result = {
+      name: `${nextPrayerName}`,
+      nextUntil: `${timeUntilNextPrayer}`,
+    };
+
+    return result;
+  }
 
   const handleUpdateCountryData = (newData: SetStateAction<CountryData>) => {
     setCountryData(newData);
@@ -131,7 +194,7 @@ function Main2() {
   // Effects
   useEffect(() => {
     const interval = setInterval(() => {
-      handleNextPrayer();
+      setResult(() => getNextPrayerTime(prayerTimes));
       const now = new Date();
       setTime({
         hour: now.getHours(),
@@ -139,7 +202,7 @@ function Main2() {
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, [paryerlist, thisHour]);
+  }, [prayerTimes, time]);
 
   useEffect(() => {
     axios
@@ -162,6 +225,15 @@ function Main2() {
           sunset: timings.Sunset,
           sunrise: timings.Sunrise,
         };
+
+        const prayerTimes = {
+          Fajr: timings.Fajr,
+          Dhuhr: timings.Dhuhr,
+          Asr: timings.Asr,
+          Maghreb: timings.Maghrib,
+          Isha: timings.Isha,
+        };
+        setPrayerTimes(prayerTimes);
 
         const updatedprayerTimeDiffer = {
           tf: HandleInterval(updatedPrayerTime.fajr, updatedPrayerTime.tahjud),
@@ -227,8 +299,10 @@ function Main2() {
                 `${countryData.theme}-theme-next`
               )}
             >
-              <h2 className="font-medium ">Next Prayer </h2>
-              <p className="text-[2.5rem] font-medium -mt-2">{result}</p>
+              <h2 className="font-medium ">{result.name} Prayer After</h2>
+              <p className="text-[2.5rem] font-medium -mt-2">
+                {result.nextUntil}
+              </p>
             </div>
 
             {/* Prayer Cards */}
@@ -286,8 +360,10 @@ function Main2() {
                     `${countryData.theme}-theme-next`
                   )}
                 >
-                  <h2 className="font-medium">Next Prayer after</h2>
-                  <p className="text-[2.5rem] font-medium -mt-2">{result}</p>
+                  <h2 className="font-medium">{result.name} Prayer After</h2>
+                  <p className="text-[2.5rem] font-medium -mt-2">
+                    {result.nextUntil}
+                  </p>
                 </div>
                 <div className="flex gap-3 flex-grow flex-wrap">
                   <Sun

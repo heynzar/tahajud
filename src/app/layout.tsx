@@ -28,11 +28,11 @@ export const metadata: Metadata = {
     title: "Tahajud - Beautiful Prayer App for Muslims",
     description:
       "Tahajud is a beautifully designed app for Muslims, offering prayer times, Time Between Prayers.",
-    url: "../../public/tahajud.png",
+    url: "https://tahajud-nine.vercel.app/",
     type: "website",
     images: [
       {
-        url: "../",
+        url: "../../public/tahajud.png",
         width: 1200,
         height: 630,
         alt: "Tahajud Web App",
