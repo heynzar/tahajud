@@ -45,7 +45,7 @@ function Main2() {
   const [dark, setDark] = useState<boolean>(false);
   const [countryData, setCountryData] = useState<CountryData>({
     country: "Morocco",
-    city: "Martil",
+    city: "Rabat",
     method: "21",
     theme: "green",
   });
@@ -182,6 +182,23 @@ function Main2() {
 
     return `${resultHours}:${resultMinutes}`;
   }
+
+  useEffect(() => {
+    const savedCountryData = localStorage.getItem("countryData");
+    const savedDarkMode = localStorage.getItem("darkMode");
+
+    if (savedCountryData) setCountryData(JSON.parse(savedCountryData));
+    if (savedDarkMode) setDark(JSON.parse(savedDarkMode));
+  }, []);
+
+  // Update local storage when countryData or dark mode changes
+  useEffect(() => {
+    localStorage.setItem("countryData", JSON.stringify(countryData));
+  }, [countryData]);
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", JSON.stringify(dark));
+  }, [dark]);
 
   // Effects
   useEffect(() => {

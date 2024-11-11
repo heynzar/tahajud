@@ -1,8 +1,7 @@
 "use client";
 
 import { CircleArrowRight, Moon, Settings } from "lucide-react";
-import { MouseEventHandler, SetStateAction } from "react";
-import { useState } from "react";
+import { MouseEventHandler, SetStateAction, useState, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 
 export default function Nav({
@@ -42,12 +41,12 @@ export default function Nav({
     setVisible(visible === "hidden" ? "flex" : "hidden");
   }
 
-  const [localCountryData, setLocalCountryData] = useState({
-    country: "Morocco",
-    city: "Martil",
-    method: "21",
-    theme: "green",
-  });
+  const [localCountryData, setLocalCountryData] = useState(countryData);
+
+  // Update localCountryData whenever countryData changes
+  useEffect(() => {
+    setLocalCountryData(countryData);
+  }, [countryData]);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -96,7 +95,7 @@ export default function Nav({
 
       <div
         className={twMerge(
-          "absolute body-settings px-3 2xl:w-full 2xl:-translate-y-1/3 inset-0 justify-center items-center z-10 bg-gray-800/70 w-screen",
+          "absolute body-settings px-3 2xl:w-full 2xl:-translate-y-1/3 inset-0 justify-center items-center z-10 backdrop-blur-[2px] bg-gray-800/70 w-screen",
           visible
         )}
         onClick={handleSectionClick}
