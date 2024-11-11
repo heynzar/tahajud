@@ -15,7 +15,6 @@ interface CountryData {
   method: string;
   theme: string;
 }
-
 interface PrayerTime {
   fajr: string;
   dhuhr: string;
@@ -26,14 +25,20 @@ interface PrayerTime {
   sunset: string;
   sunrise: string;
 }
-
 interface TimeState {
   hour: number;
   minutes: number;
 }
+interface PrayerTimes {
+  Fajr: string;
+  Dhuhr: string;
+  Asr: string;
+  Maghreb: string;
+  Isha: string;
+}
 
 function Main2() {
-  // Handlers
+  // Dark Mode
   const toggleDarkMode = () => setDark((prev) => !prev);
 
   // State hooks
@@ -54,7 +59,6 @@ function Main2() {
     mi: "06:19",
     if: "06:19",
   });
-  const [prayerList, setPrayerList] = useState<number[][]>([]);
   const [prayerTime, setPrayerTime] = useState<PrayerTime>({
     fajr: "4:24",
     dhuhr: "13:33",
@@ -65,7 +69,6 @@ function Main2() {
     sunset: "20:35",
     sunrise: "06:19",
   });
-
   const [prayerTimes, setPrayerTimes] = useState<PrayerTimes>({
     Fajr: "4:24",
     Dhuhr: "13:33",
@@ -73,7 +76,6 @@ function Main2() {
     Maghreb: "20:41",
     Isha: "22:14",
   });
-
   const [result, setResult] = useState<{ name: string; nextUntil: string }>({
     name: "Fajr",
     nextUntil: "1h 04min",
@@ -82,16 +84,6 @@ function Main2() {
     hour: new Date().getHours(),
     minutes: new Date().getMinutes(),
   });
-
-  // Derived constants
-
-  type PrayerTimes = {
-    Fajr: string;
-    Dhuhr: string;
-    Asr: string;
-    Maghreb: string;
-    Isha: string;
-  };
 
   function getNextPrayerTime(prayerTimes: PrayerTimes): {
     name: string;
@@ -225,6 +217,7 @@ function Main2() {
           sunset: timings.Sunset,
           sunrise: timings.Sunrise,
         };
+        setPrayerTime(updatedPrayerTime);
 
         const prayerTimes = {
           Fajr: timings.Fajr,
@@ -250,19 +243,7 @@ function Main2() {
         } ${response.data.data.date.hijri.month.en} ${
           response.data.data.date.hijri.year
         }`;
-
         SetHijriDate(hijri);
-
-        const prayerTimesArray = [
-          timings.Fajr.split(":"),
-          timings.Dhuhr.split(":"),
-          timings.Asr.split(":"),
-          timings.Maghrib.split(":"),
-          timings.Isha.split(":"),
-        ].map((time) => [Number(time[0]), Number(time[1])]);
-
-        setPrayerList(prayerTimesArray);
-        setPrayerTime(updatedPrayerTime);
       })
       .catch((error) => {
         console.log(error);
@@ -277,6 +258,7 @@ function Main2() {
           dark ? "dark" : ""
         )}
       >
+        <h1 className="hidden">Tahajud</h1>
         <Nav
           hijriDate={hijriDate}
           forwardFunction={subtractDay}
@@ -285,7 +267,6 @@ function Main2() {
           onUpdateCountryData={handleUpdateCountryData}
           countryData={countryData}
         />
-        <h1 className="hidden">Tahajud</h1>
         <div
           className={twMerge(
             "transition-colors p-4 rounded-3xl shadow-[0_5px_30px_rgb(0,0,0,0.12)]",
