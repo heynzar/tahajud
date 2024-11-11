@@ -27,6 +27,9 @@
     rgb(160, 233, 255) 100%
   );
 }
+body {
+  font-family: var(--montserrat), Helvetica, sans-serif;
+}
 .visually-hidden {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
