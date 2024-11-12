@@ -155,7 +155,7 @@ form input[type="radio"]:checked {
 @media (max-width: 370px) {
   .big-boy {
     position: relative;
-    height: 100%;
+    height: 150%;
   }
   .body-settings {
     height: 100%;
