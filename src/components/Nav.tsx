@@ -65,8 +65,13 @@ export default function Nav({
   }
 
   return (
-    <nav className="w-full text-gray-950 py-3 gap-5 flex flex-col-reverse justify-center items-center lg:flex-row lg:justify-between font-semibold">
-      <div className="flex gap-3 items-center">
+    <nav
+      className={twMerge(
+        "w-full  py-3 gap-5 flex flex-col-reverse justify-center items-center lg:flex-row lg:justify-between font-semibold",
+        countryData.theme === "solid" ? "text-gray-100" : "text-gray-950"
+      )}
+    >
+      <div className="flex gap-3 items-center ">
         <div className="p-1 hover:bg-white/50 rounded-md transition-colors">
           <CircleArrowRight
             className="rotate-180 cursor-pointer"
@@ -120,7 +125,7 @@ export default function Nav({
               placeholder="Morocco"
               id="country"
               name="country"
-              className="h-10 rounded-lg pl-4 bg-white/80 dark:bg-white/40 placeholder:text-black/50"
+              className="h-10 rounded-lg pl-4 bg-white/80 dark:dark:bg-neutral-900 placeholder:text-black/50"
             />
           </div>
 
@@ -133,7 +138,7 @@ export default function Nav({
               type="text"
               id="city"
               name="city"
-              className="h-10 rounded-lg pl-4 bg-white/80 dark:bg-white/40 placeholder:text-black/50"
+              className="h-10 rounded-lg pl-4 bg-white/80 dark:dark:bg-neutral-900 placeholder:text-black/50"
             />
           </div>
 
@@ -144,7 +149,7 @@ export default function Nav({
               value={localCountryData.method}
               name="method"
               id="method"
-              className="h-10 rounded-lg px-4 bg-white/80 dark:bg-gray-900 "
+              className="h-10 rounded-lg px-4 bg-white/80 dark:bg-neutral-900 "
             >
               <option value="">Select Prayer Method</option>
               <option value="1">🌍 Muslim World League</option>
@@ -243,6 +248,19 @@ export default function Nav({
               className="bg-sunset"
               onChange={handleChange}
               checked={localCountryData.theme === "sunset"}
+            />
+
+            <label htmlFor="solid" className="visually-hidden">
+              Solid dark theme
+            </label>
+            <input
+              type="radio"
+              id="solid"
+              name="theme"
+              value="solid"
+              className="bg-solid"
+              onChange={handleChange}
+              checked={localCountryData.theme === "solid"}
             />
           </fieldset>
 

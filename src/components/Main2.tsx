@@ -369,12 +369,14 @@ function Main2() {
                     time={prayerTime.sunrise}
                     name="Sunrise"
                     reverse={false}
+                    dark={dark}
                   />
                   <Sun
                     theme={countryData.theme}
                     time={prayerTime.sunset}
                     name="Sunset"
                     reverse={true}
+                    dark={dark}
                   />
                 </div>
               </div>

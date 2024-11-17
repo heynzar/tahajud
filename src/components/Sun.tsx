@@ -5,11 +5,13 @@ export default function Sun({
   name,
   time,
   theme,
+  dark,
 }: {
   reverse: boolean;
   name: string;
   time: string;
   theme: string;
+  dark: boolean;
 }) {
   return (
     <div
@@ -34,8 +36,9 @@ export default function Sun({
         >
           <ArrowUp
             className={twMerge(
-              "absolute bottom-2 text-white size-5",
-              reverse ? "" : "rotate-180"
+              "absolute bottom-2  size-5",
+              reverse ? "" : "rotate-180",
+              dark ? "text-neutral-800" : "text-white"
             )}
           />
         </div>

@@ -43,6 +43,9 @@ body {
 .bg-sunset {
   background-image: var(--sunset);
 }
+.bg-solid {
+  @apply bg-[#171717] dark:bg-neutral-300;
+}
 .bg-peach {
   background-image: var(--peach);
 }
@@ -59,15 +62,20 @@ body {
 .peach-theme-next {
   @apply bg-red-300;
 }
+.solid-theme-next {
+  @apply dark:bg-neutral-300 dark:text-neutral-800 bg-neutral-900 text-gray-100;
+}
 .blue-theme-next {
   @apply bg-sky-300;
 }
 .sunset-theme-next {
   @apply bg-pink-300 dark:bg-pink-300/90;
 }
-
 .green-theme-circle {
   @apply !bg-[#4dffaf] shadow-[0_0px_30px_rgb(0,255,140,0.6)];
+}
+.solid-theme-circle {
+  @apply bg-neutral-900 shadow-[0_0px_30px_rgb(1,1,1,0.5)]  dark:!bg-neutral-300 dark:shadow-[0_0px_30px_rgb(255,255,255,0.3)];
 }
 .peach-theme-circle {
   @apply bg-red-300 shadow-[0_0px_30px_rgb(252,165,165,0.6)];
@@ -82,6 +90,9 @@ body {
 .green-theme-card {
   @apply border-emerald-500 dark:border-emerald-700 text-emerald-950 dark:text-emerald-100 bg-emerald-100/40 dark:bg-emerald-800;
 }
+.solid-theme-card {
+  @apply border-neutral-500 dark:border-neutral-700 text-neutral-950 dark:text-neutral-100 bg-neutral-200/40 dark:bg-neutral-800;
+}
 .sunset-theme-card {
   @apply border-pink-500 dark:border-pink-700 text-pink-950 dark:text-pink-100 bg-pink-100/40 dark:bg-pink-800;
 }
@@ -94,6 +105,9 @@ body {
 /* main */
 .green-theme-main {
   @apply bg-white dark:bg-emerald-950;
+}
+.solid-theme-main {
+  @apply bg-neutral-100 dark:bg-neutral-800/50;
 }
 .peach-theme-main {
   @apply bg-white dark:bg-red-950;
@@ -117,9 +131,15 @@ body {
 .sunset-theme-btn {
   @apply bg-pink-500  hover:bg-pink-400 transition-colors;
 }
+.solid-theme-btn {
+  @apply bg-neutral-500  hover:bg-neutral-600 transition-colors;
+}
 /* Modal */
 .green-theme-set {
   @apply border-emerald-500 dark:border-emerald-700 text-emerald-950 dark:text-emerald-100 bg-emerald-100 dark:bg-emerald-800;
+}
+.solid-theme-set {
+  @apply border-neutral-500 dark:border-neutral-700 text-neutral-950 dark:text-neutral-100 bg-neutral-100 dark:bg-neutral-800;
 }
 .sunset-theme-set {
   @apply border-pink-500 dark:border-pink-700 text-pink-950 dark:text-pink-100 bg-pink-100 dark:bg-pink-800;
@@ -136,7 +156,7 @@ form input[type="radio"] {
   margin-left: 10px;
   width: 3rem;
   height: 3rem;
-  background-color: #ccc;
+  background-image: #222;
   border-radius: 50%;
 }
 form input[type="radio"]:checked {
