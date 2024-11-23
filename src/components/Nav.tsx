@@ -195,7 +195,7 @@ export default function Nav({
             </select>
           </div>
 
-          <fieldset className="flex gap-2 border-t-2 border-black/50 pt-3">
+          <fieldset className="flex justify-center gap-0 md:gap-2 border-t-2 border-black/50 pt-3">
             <legend className="visually-hidden">Pick a Theme</legend>
 
             <label htmlFor="green" className="visually-hidden">
@@ -258,7 +258,7 @@ export default function Nav({
               id="solid"
               name="theme"
               value="solid"
-              className="bg-solid"
+              className="bg-[#171717]"
               onChange={handleChange}
               checked={localCountryData.theme === "solid"}
             />

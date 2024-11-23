@@ -91,7 +91,7 @@ body {
   @apply border-emerald-500 dark:border-emerald-700 text-emerald-950 dark:text-emerald-100 bg-emerald-100/40 dark:bg-emerald-800;
 }
 .solid-theme-card {
-  @apply border-neutral-500 dark:border-neutral-700 text-neutral-950 dark:text-neutral-100 bg-neutral-200/40 dark:bg-neutral-800;
+  @apply border-neutral-500 dark:border-neutral-600/70 text-neutral-950 dark:text-neutral-100 bg-neutral-200/40 dark:bg-neutral-700/50;
 }
 .sunset-theme-card {
   @apply border-pink-500 dark:border-pink-700 text-pink-950 dark:text-pink-100 bg-pink-100/40 dark:bg-pink-800;
@@ -107,7 +107,7 @@ body {
   @apply bg-white dark:bg-emerald-950;
 }
 .solid-theme-main {
-  @apply bg-neutral-100 dark:bg-neutral-800/50;
+  @apply bg-neutral-100 dark:bg-neutral-800;
 }
 .peach-theme-main {
   @apply bg-white dark:bg-red-950;
