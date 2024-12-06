@@ -172,7 +172,7 @@ form input[type="radio"]:checked {
 .body-settings {
   height: 100vh;
 }
-@media (max-width: 370px) {
+@media (max-width: 425px) {
   .big-boy {
     position: relative;
     height: 150%;

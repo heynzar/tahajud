@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "Qibla Salat",
     "daily prayers",
   ],
-  authors: [{ name: "NZAR", url: "https://nzar-q.vercel.app" }],
+  authors: [{ name: "NZAR", url: "https://nzar.dev" }],
   openGraph: {
     title: "Tahajud - Beautiful Prayer App for Muslims",
     description:
